@@ -79,7 +79,7 @@ services:
   detectrx-solomon:
     container_name: 'detectrx-solomon'
     hostname: 'solomon-drug-div'
-    image: 'docker.iatric.com/solomon-drug-div:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-solomon:1.0.2.1'
     mem_limit: 17179869184
     environment:
         TZ: 'UTC'
