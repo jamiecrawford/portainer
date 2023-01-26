@@ -117,7 +117,7 @@ services:
         SPARK_HOME: '/usr/lib/spark-3.0.1-bin-hadoop2.7'
         PYTHONPATH: '/usr/lib/spark-3.0.1-bin-hadoop2.7/python/lib/py4j-0.10.4-src.zip:/usr/lib/spark-3.0.1-bin-hadoop2.7/python:/usr/lib/spark-3.0.1-bin-hadoop2.7/python/build:'
         JAVA_HOME: '/usr/lib/jvm/java-1.8.0-openjdk-amd64'
-        PRODUCTION: 
+        PRODUCTION:
 	SFTP_USERNAME: 'detectrx'
         SFTP_PASSWORD: ${SFTP_PASSWORD}
         DRUG_DIV_DB_PORT: '3306'
