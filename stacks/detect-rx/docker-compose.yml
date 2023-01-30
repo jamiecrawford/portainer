@@ -135,6 +135,7 @@ services:
       - "dataloadfiles-local:/mnt/dataloadfiles"
       - "config-ini-volume-local:/mnt/config"
       - "./config:/mnt/src/solomon/core/solomon/de_config/configurations"
+      - "solomon-local-bin:/usr/local/bin"
     working_dir: "/mnt/src/drug_div"
     ports:
       - "18081:18080"
@@ -426,4 +427,6 @@ volumes:
   detectrx-db:
     external: false
   detectrx-fastlane-db:
+    external: false
+  solomon-local-bin:
     external: false
