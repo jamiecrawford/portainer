@@ -74,6 +74,8 @@ services:
       - crm_uploads:/app/uploads
     networks:
       - crm-net
+    env_file:
+      - stack.env
 volumes:
   config-ini:
     name: crm_config_ini
