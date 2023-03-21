@@ -5,7 +5,7 @@ services:
   detectrx-db:
     container_name: 'detectrx-db'
     hostname: 'detectrx-db'
-    image: 'docker.iatric.com/detectrx-db:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-db:${IMAGE_TAG}'
     environment:
       TZ: 'UTC'
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -79,7 +79,7 @@ services:
   detectrx-solomon:
     container_name: 'detectrx-solomon'
     hostname: 'solomon-drug-div'
-    image: 'docker.iatric.com/detectrx-solomon:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-solomon:${IMAGE_TAG}'
     mem_limit: 17179869184
     privileged: true
     environment:
@@ -122,8 +122,7 @@ services:
         SFTP_USERNAME: detectrx	   
         SFTP_PASSWORD: ${SFTP_PASSWORD}
         DRUG_DIV_DB_PORT: '3306'
-        SCRIPT_INSIDE_DOCKER: '1'
-    privileged: true
+        SCRIPT_INSIDE_DOCKER: '1'    
     depends_on:
       solomon-db:
         condition: service_healthy
@@ -208,7 +207,7 @@ services:
   detectrx-fastlane-db:
     container_name: 'detectrx-fastlane-db'
     hostname: detectrx-fastlane-db
-    image: 'docker.iatric.com/detectrx-fastlane-db:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-fastlane-db:${IMAGE_TAG}'
     environment:
         TZ: UTC
         MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -232,7 +231,7 @@ services:
   detectrx-sftp:
     container_name: 'sftp-host'
     hostname: 'sftp-host'
-    image: 'docker.iatric.com/detectrx-sftp:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-sftp:${IMAGE_TAG}'
     command:
       - "/entrypoint"
       - "detectrx:${SFTP_PASSWORD}:1001"
@@ -259,7 +258,7 @@ services:
   detectrx-nginx:
     container_name: 'detectrx-nginx'
     hostname: 'detectrx-nginx'
-    image: 'docker.iatric.com/detectrx-nginx:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-nginx:${IMAGE_TAG}'
     ports:
       - "3443:443"
     volumes:
@@ -303,7 +302,7 @@ services:
   detectrx-client:
     container_name: 'detectrx-client'
     hostname: 'detectrx-client'
-    image: 'docker.iatric.com/detectrx-client:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-client:${IMAGE_TAG}'
     dns:
       - 8.8.8.8
       - 4.4.4.4    
@@ -354,7 +353,7 @@ services:
   detectrx-ava-client:
     container_name: 'detectrx-ava-client'
     hostname: 'detectrx-ava-client'
-    image: 'docker.iatric.com/detectrx-ava-client:1.0.2.1'
+    image: 'docker.iatric.com/detectrx-ava-client:${IMAGE_TAG}'
     mem_limit: 17179869184
     ports:
       - "3002:3001"
