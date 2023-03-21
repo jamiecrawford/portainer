@@ -21,8 +21,6 @@ services:
       PRODUCTION: 'true'
     volumes:
       - 'detectrx-db:/var/lib/mysql'
-    security_opt:
-      - "seccomp:unconfined"      
     ports:
       - "3316:3306"
     logging:
