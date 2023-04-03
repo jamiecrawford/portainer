@@ -49,7 +49,7 @@ services:
       - "/mnt/entrypoint.sh"
     environment:
       TZ: UTC
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_SOLOMON_DB_PASSWORD}
       DB_PASSWORD: ${MYSQL_SOLOMON_DB_PASSWORD}
       DOCKER_HOSTNAME: 'localhost'
       DOCKER_HOSTIPADDR: '127.0.0.1'
