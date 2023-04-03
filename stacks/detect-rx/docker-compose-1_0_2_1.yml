@@ -88,7 +88,7 @@ services:
     privileged: true
     environment:
         TZ: 'UTC'
-        DRUG_DIV_DB_PASSWORD: ${MYSQL_DETECTRX_DB_PASSWORD}
+        DRUG_DIV_DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         DRUG_DIV_DB_SERVER: 'detectrx-solomon'
         DRUG_DIV_DATABASE: 'detectrx'
         DRUG_DIV_DB_USER: 'root'
