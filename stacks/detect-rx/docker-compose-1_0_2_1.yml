@@ -153,8 +153,8 @@ services:
       test: ["CMD-SHELL", 'test $$(find /mnt/log/drug_div_proc/solomon/ -type f -mmin 5 | wc -c) -ne 0']
       interval: 60s
       timeout: 10s
-      retries: 2
-      start_period: 180s               
+      retries: 10
+      start_period: 300s               
  # --------------------------------------------------------------------------------------------
                                                    
   detectrx-sftp:
