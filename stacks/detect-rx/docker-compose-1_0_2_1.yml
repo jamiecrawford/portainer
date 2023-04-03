@@ -10,7 +10,7 @@ services:
     environment:
       TZ: 'UTC'
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_PASSWORD: ${MYSQL_DETECTRX_DB_PASSWORD}
       DOCKER_HOSTNAME: 'localhost'
       DOCKER_HOSTIPADDR: '127.0.0.1'
       CLIENT_CODE: ${SITE_CODE}
@@ -88,7 +88,7 @@ services:
     privileged: true
     environment:
         TZ: 'UTC'
-        DRUG_DIV_DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        DRUG_DIV_DB_PASSWORD: ${MYSQL_DETECTRX_DB_PASSWORD}
         DRUG_DIV_DB_SERVER: 'detectrx-solomon'
         DRUG_DIV_DATABASE: 'detectrx'
         DRUG_DIV_DB_USER: 'root'
@@ -256,7 +256,7 @@ services:
       DB_HOSTNAME: 'detectrx-db'
       DB_LOGGING: '0'
       DB_NAME: 'detectrx'
-      DB_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      DB_PASSWORD: '${MYSQL_DETECTRX_DB_PASSWORD}'
       DB_PORT: '3306'
       DB_USERNAME: 'root'
       X_AUTH_TOKEN_SECRET: ${TOKEN_SECRET}
@@ -318,7 +318,7 @@ services:
       PRODUCT_DB_HOSTNAME: 'detectrx-db'
       PRODUCT_DB_LOGGING: 'false'
       PRODUCT_DB_NAME: 'detectrx'
-      PRODUCT_DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      PRODUCT_DB_PASSWORD: ${MYSQL_DETECTRX_DB_PASSWORD}
       PRODUCT_DB_PORT: '3306'
       PRODUCT_DB_USERNAME: 'root'
       PRODUCT_PLATFORM: 'drug_div'
