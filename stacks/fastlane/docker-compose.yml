@@ -34,6 +34,7 @@ services:
       - ${APP_PORT}:443/tcp
     extra_hosts:
       - "ialert2.iatric.com:192.168.12.42"
+      - "ialert.iatric.com:192.168.12.42"
     volumes:
       - /home/iatric/certificates:/app/certificates
       - /home/iatric/apps/fastlane_${ENVIRONMENT}/uploads:/app/uploads
