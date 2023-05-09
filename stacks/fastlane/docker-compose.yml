@@ -37,8 +37,8 @@ services:
       - "ialert.iatric.com:192.168.12.42"
       - "sws.iatric.com:192.168.12.42"
     volumes:
-      - /home/iatric/certificates:/app/certificates
-      - /home/iatric/apps/fastlane_${ENVIRONMENT}/uploads:/app/uploads
+      - /home/fastlane/certificates:/app/certificates
+      - /home/fastlane/apps/fastlane_${ENVIRONMENT}/uploads:/app/uploads
     environment:
       APPLICATION_API: https://fastlane_${ENVIRONMENT}/api
       APPLICATION_API_CLIENT: https://${SERVER_HOSTNAME}:${APP_PORT}/api
