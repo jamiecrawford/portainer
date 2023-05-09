@@ -26,7 +26,7 @@ services:
     hostname: fastlane_${ENVIRONMENT}
     networks:
       - iatric
-    image: docker.iatric.com/fastlane:${VERSION}-alpine
+    image: docker.iatric.com/fastlane:v2.1.3-alpine
     restart: unless-stopped
     depends_on:
       - db
