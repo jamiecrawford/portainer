@@ -9,6 +9,7 @@ services:
     environment:
       TZ: 'UTC'
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_SOLOMON_DB_PASSWORD: ${MYSQL_SOLOMON_DB_PASSWORD}
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: 'detectrx'
       DOCKER_HOSTNAME: 'localhost'
@@ -19,8 +20,11 @@ services:
       TERM: 'xterm'
       GOSU_VERSION: '1.12'
       PRODUCTION: 'true'
+    depends-on:
+      "solomon-db"
     volumes:
       - 'detectrx-db:/var/lib/mysql'
+      - 'detectrx-db-etc:/var/etc'
     ports:
       - "3316:3306"
     logging:
@@ -88,6 +92,7 @@ services:
         DRUG_DIV_DB_SERVER: '10.1.1.1'
         DRUG_DIV_DATABASE: 'detectrx'
         DRUG_DIV_DB_USER: 'root'
+        DRUG_DIV_DB_AUTOCOMMIT='True'
         DRUG_DIV_RUN_LOAD: 'True'
         DRUG_DIV_LOAD_IMPORT_PATH: '/mnt/dataloadfiles/'
         DRUG_DIV_LOAD_LOG_PATH: '/mnt/log/drug_div_proc/data_load/'
@@ -123,6 +128,7 @@ services:
         SFTP_PASSWORD: ${SFTP_PASSWORD}
         DRUG_DIV_DB_PORT: '3306'
         SCRIPT_INSIDE_DOCKER: '1'    
+        IALERT_LAST_PROCESSED_MINUTES: 360
     depends_on:
       solomon-db:
         condition: service_healthy
@@ -132,7 +138,7 @@ services:
       - "all-logs-local:/mnt/log"
       - "solomon-data-volume-local:/mnt/solomon_data"
       - "dataloadfiles-local:/mnt/dataloadfiles"
-      - "config-ini-volume-local:/mnt/config"
+      - "config-ini-volume-local:/mnt/config:rw,Z"
       - "./config:/mnt/src/solomon/core/solomon/de_config/configurations"
       - "solomon-local-bin:/usr/local/bin"
     working_dir: "/mnt/src/drug_div"
@@ -260,12 +266,14 @@ services:
     hostname: 'detectrx-nginx'
     image: 'docker.iatric.com/detectrx-nginx:${IMAGE_TAG}'
     ports:
-      - "3443:443"
+      - "443:443"
     volumes:
       - "/home/fastlane/certificates:/etc/nginx/ssl/"
     restart: "always"
     depends_on:
       - "metabase"
+      - "detectrx-ava-client"
+      - "fastlane"      
     environment:
         NGINX_HOST: ${HOST_FQDN}
         NGINX_INSTANCE: ${NGINX_INSTANCE}
@@ -327,14 +335,22 @@ services:
         DB_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
         DB_PORT: '3306'
         DB_USERNAME: 'root'
+        SOLOMON_DB_USERNAME: root
+        SOLOMON_DB_PASSWORD: ${MYSQL_SOLOMON_DB_PASSWORD}
+        SOLOMON_DB_NAME: solomon
+        SOLOMON_DB_HOSTNAME: solomon-db        
         X_AUTH_TOKEN_SECRET: ${TOKEN_SECRET}
         X_AUTH_TOKEN_EXPIRATION: '15'
         X_AUTH_REFRESH_TOKEN_SECRET: ${TOKEN_SECRET}
         X_AUTH_RERESH_TOKEN_EXPIRATION: '480'
     restart: "always"
     volumes:
+      - "all-logs-local:/mnt/log"
       - "dataloadfiles-local:/mnt/dataloadfiles" # We want to be able to look at the solomon-drug-div import errors and ddhold files
       - "/home/fastlane/certificates:/app/certificates"
+      - "config-ini-volume-local:/mnt/config:rw,Z"
+      - "./config:/detectrx_config:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"      
     networks:
       - "detectrx-subnet-local"
     depends_on:
