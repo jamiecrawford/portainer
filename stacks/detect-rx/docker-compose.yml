@@ -20,8 +20,9 @@ services:
       TERM: 'xterm'
       GOSU_VERSION: '1.12'
       PRODUCTION: 'true'
-    depends-on:
-      "solomon-db"
+    depends_on:
+      solomon-db:
+        condition: service_healthy
     volumes:
       - 'detectrx-db:/var/lib/mysql'
       - 'detectrx-db-etc:/var/etc'
@@ -92,7 +93,7 @@ services:
         DRUG_DIV_DB_SERVER: '10.1.1.1'
         DRUG_DIV_DATABASE: 'detectrx'
         DRUG_DIV_DB_USER: 'root'
-        DRUG_DIV_DB_AUTOCOMMIT='True'
+        DRUG_DIV_DB_AUTOCOMMIT: 'True'
         DRUG_DIV_RUN_LOAD: 'True'
         DRUG_DIV_LOAD_IMPORT_PATH: '/mnt/dataloadfiles/'
         DRUG_DIV_LOAD_LOG_PATH: '/mnt/log/drug_div_proc/data_load/'
