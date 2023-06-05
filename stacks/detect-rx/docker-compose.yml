@@ -25,7 +25,7 @@ services:
         condition: service_healthy
     volumes:
       - 'detectrx-db:/var/lib/mysql'
-      - 'detectrx-db-etc:/var/etc'
+      - 'detectrx-db-etc:/etc/mysql'
     ports:
       - "3316:3306"
     logging:
@@ -450,4 +450,6 @@ volumes:
   detectrx-fastlane-db:
     external: false
   solomon-local-bin:
+    external: false
+  detectrx-db-etc:
     external: false
